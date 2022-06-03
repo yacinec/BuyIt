@@ -10,7 +10,9 @@ import {
 export default function Navbar() {
   return (
     <nav className='navbar'>
-      <h1>BuyIt</h1>
+      <h1>
+        Buy<span className='purple'>It</span>
+      </h1>
       <ul className='links'>
         <li>
           <Link to='/signin'>Sign In</Link>

@@ -1,3 +1,5 @@
+$purple: #4338ca;
+
 #root,
 html,
 body {
@@ -24,14 +26,32 @@ h1 {
 a {
   color: #000;
   text-decoration: none;
+
+  &:hover {
+    color: $purple;
+  }
+}
+
+.purple {
+  color: $purple;
 }
 
 .btn {
-  background: #3498db;
+  //background: #3498db;
   color: #fff;
   border: none;
   padding: 10px;
   font-size: 1rem;
+
+  &:hover {
+    filter: brightness(0.75);
+  }
+}
+
+.btn-group {
+  button {
+    margin-right: 10px;
+  }
 }
 
 .bold {
@@ -82,6 +102,44 @@ a {
         color: #000;
         font-size: 1rem;
         padding: 10px 20px;
+      }
+    }
+  }
+}
+
+.articles {
+  display: flex;
+  box-sizing: border-box;
+  padding: 30px 50px;
+  width: 100%;
+  height: auto;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  .article-card {
+    margin: 20px 0;
+    img {
+      width: 500px;
+      height: 350px;
+      object-fit: cover;
+    }
+  }
+}
+
+@media screen and (max-width: 1115px) {
+  .articles {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .articles {
+    .article-card {
+      width: 100%;
+      img {
+        width: 100%;
+        height: 250px;
       }
     }
   }
