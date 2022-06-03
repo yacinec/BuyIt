@@ -1,0 +1,88 @@
+#root,
+html,
+body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  background: #eeeeee;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+a {
+  color: #000;
+  text-decoration: none;
+}
+
+.btn {
+  background: #3498db;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  font-size: 1rem;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 30px;
+  box-sizing: border-box;
+  background: #fff;
+
+  .links {
+    padding: 0;
+    display: flex;
+    list-style: none;
+    gap: 10px;
+    font-size: 1rem;
+  }
+}
+
+.sign {
+  display: flex;
+  margin-top: 70px;
+  justify-content: center;
+  align-items: center;
+
+  main {
+    background: #fff;
+    box-sizing: border-box;
+    padding: 50px 50px;
+
+    h2 {
+      text-align: center;
+      font-size: 1.8rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      input {
+        border: 1px solid #b7b7b7;
+        background: #eeeeee;
+        color: #000;
+        font-size: 1rem;
+        padding: 10px 20px;
+      }
+    }
+  }
+}
