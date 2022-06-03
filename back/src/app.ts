@@ -7,7 +7,7 @@ import { router } from './api';
 
 mongoose.connect(`${DATABASE_URL}`)
 .catch(err => {
-  console.warn(err.message);
+  console.log(err.message);
 })
 .then(() => {
   const app = express();
