@@ -21,12 +21,17 @@ export default function Navbar() {
           <Link to='/signup'>Sign Up</Link>
         </li>
         <li>
+          <Link to='/'>
+            <FontAwesomeIcon icon={solid("home")} />
+          </Link>
+        </li>
+        <li>
           <Link to='/cart'>
             <FontAwesomeIcon icon={solid("bag-shopping")} />
           </Link>
         </li>
         <li>
-          <Link to='/order'>
+          <Link to='/orders'>
             <FontAwesomeIcon icon={solid("truck-fast")} />
           </Link>
         </li>

@@ -1,4 +1,8 @@
 $purple: #4338ca;
+$green: #0d9488;
+$orange: #d97706;
+$blue: #0284c7;
+$grey: #b7b7b7;
 
 #root,
 html,
@@ -34,6 +38,16 @@ a {
 
 .purple {
   color: $purple;
+}
+
+.blue {
+  color: $blue;
+}
+.orange {
+  color: $orange;
+}
+.green {
+  color: $green;
 }
 
 .btn {
@@ -126,10 +140,142 @@ a {
   }
 }
 
+.orders {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 50px 200px;
+
+  .order {
+    width: 100%;
+    padding: 50px 30px;
+    box-sizing: border-box;
+    background: #fff;
+
+    .order-id {
+      text-align: center;
+      font-weight: 600;
+      font-size: 2rem;
+      margin: 0;
+    }
+
+    .order-header {
+      .order-info {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+    .order-main {
+      display: block;
+    }
+
+    .order-button {
+      display: block;
+      width: 100%;
+      border: none;
+      background: #f7f6f9;
+      border-radius: 15px;
+      padding: 15px 20px;
+      font-weight: 600;
+      position: relative;
+      text-align: left;
+      font-size: 1rem;
+
+      &:after {
+        position: absolute;
+        right: 20px;
+        content: "\f106";
+        font-family: "FontAwesome";
+      }
+    }
+
+    .order-button.close-icon {
+      &:after {
+        content: "\f107";
+      }
+    }
+
+    .close {
+      display: none;
+    }
+
+    .order-article {
+      margin-top: 30px;
+      width: 100%;
+      display: flex;
+      align-items: flex-start;
+      gap: 30px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid $grey;
+
+      img {
+        width: 100px;
+        border-radius: 10px;
+      }
+
+      .order-article-details {
+        flex: 1;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+
+        h4 {
+          margin: 0;
+          font-weight: 600;
+          font-size: 1rem;
+        }
+
+        p {
+          font-size: 1rem;
+          margin: 0;
+        }
+
+        .brand {
+          font-size: 0.8rem;
+          color: $grey;
+        }
+      }
+    }
+
+    .order-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-weight: 700;
+    }
+  }
+}
+
 @media screen and (max-width: 1115px) {
   .articles {
     flex-direction: column;
     align-items: center;
+  }
+
+  .orders .order .order-id {
+    text-align: left;
+  }
+
+  .order-info {
+    flex-direction: column;
+    p {
+      margin-bottom: 5px;
+    }
+  }
+  .orders .order .order-button {
+    margin-top: 20px;
+  }
+
+  .orders {
+    padding: 50px 100px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .orders {
+    padding: 50px 50px;
   }
 }
 
@@ -142,5 +288,35 @@ a {
         height: 250px;
       }
     }
+  }
+  .orders {
+    padding: 50px 10px 50px 10px;
+  }
+
+  .orders .order .order-article img {
+    width: 70px;
+  }
+
+  .orders .order .order-article .order-article-details .article-name {
+    font-size: 1rem;
+  }
+
+  .order-info p,
+  .orders .order .order-article .order-article-details p.article-price,
+  .orders .order .order-button {
+    font-size: 0.8rem;
+  }
+
+  .orders .order .order-id {
+    text-align: center;
+    font-size: 1.5rem;
+  }
+
+  .orders .order {
+    padding-bottom: 10px;
+  }
+
+  .orders .order:last-child {
+    padding-bottom: 30px;
   }
 }

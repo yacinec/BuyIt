@@ -1,8 +1,8 @@
 enum Brand {
-  ASUS,
-  APPLE,
-  HP,
-  LENOVO,
+  ASUS = "ASUS",
+  APPLE = "APPLE",
+  HP = "HP",
+  LENOVO = "LENOVO",
 }
 
 export default Brand;
