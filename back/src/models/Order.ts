@@ -1,14 +1,14 @@
 import mongoose from 'mongoose';
 
 const orderSchema = new mongoose.Schema({
-  articleId: [
+  articlesRef: [
     { type: mongoose.Schema.Types.ObjectId, ref: 'Article' }
   ],
-  date: { type:Date, default: new Date },
-  modifiedDate: Date,
-  progression: ["In preparation", "On the way", "Arrived"],
+  createAt: { type: Date, default: new Date },
+  modifiedAt: { type: Date, default: new Date },
+  progression: { type: String, enum: ['PREPAR', 'ONROAD', 'ARRIVE'], default: 'PREPAR'},
   address: String,
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
+  userRef: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
 });
 
 export const Order = mongoose.model('Order', orderSchema);
