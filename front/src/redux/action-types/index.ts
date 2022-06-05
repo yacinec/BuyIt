@@ -1,0 +1,10 @@
+enum ActionType {
+  LOGIN = "LOGIN",
+  LOGOUT = "LOGOUT",
+  REFRESH = "REFRESH",
+  ADD_ARTICLE = "ADD_ARTICLE",
+  REMOVE_ARTICLE = "REMOVE_ARTICLE",
+  UPDATE_ARTICLE = "UPDATE_ARTICLE",
+}
+
+export default ActionType;

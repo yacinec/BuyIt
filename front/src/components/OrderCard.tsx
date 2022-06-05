@@ -8,6 +8,7 @@ import {
   //regular,
   //brands,
 } from "@fortawesome/fontawesome-svg-core/import.macro";
+import ArticleInline from "./ArticleInline";
 
 const OrderCard: React.FC<Order> = (props) => {
   const articles = props.articles;
@@ -45,7 +46,7 @@ const OrderCard: React.FC<Order> = (props) => {
       />
       <main ref={orderContentRef} className='order-main'>
         {articles.map((article: Article, index: number) => {
-          return <OrderArticle key={index} article={article} index={index} />;
+          return <ArticleInline key={index} article={article} index={index} />;
         })}
         <OrderFooter total={total()} />
       </main>
@@ -124,6 +125,7 @@ const OrderHeader: React.FC<OrderHeaderProps> = (props) => {
   );
 };
 
+/*
 interface OrderArticleProps {
   index: number;
   article: Article;
@@ -131,18 +133,19 @@ interface OrderArticleProps {
 
 const OrderArticle: React.FC<OrderArticleProps> = (props) => {
   return (
-    <div key={props.index} className='order-article'>
+    <div key={props.index} className='article-inline'>
       <img src={props.article.img} alt={props.article.name} />
-      <div className='order-article-details'>
+      <div className='article-inline-details'>
         <div>
-          <h4 className='article-name'>{props.article.name}</h4>
-          <p className='brand'>{props.article.brand}</p>
+          <h4 className='article-inline-name'>{props.article.name}</h4>
+          <p className='article-inline-brand'>{props.article.brand}</p>
         </div>
-        <p className='article-price'>${props.article.price}</p>
+        <p className='article-inline-price'>${props.article.price}</p>
       </div>
     </div>
   );
 };
+*/
 
 interface OrderFooterProps {
   total: number;

@@ -139,15 +139,62 @@ a {
     }
   }
 }
-
-.orders {
+.orders,
+.carts {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
   padding: 50px 200px;
+}
 
+.order,
+.cart {
+  width: 100%;
+  padding: 50px 30px;
+  box-sizing: border-box;
+  background: #fff;
+}
+
+.carts {
+  h2 {
+    background-color: #fff;
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    padding-top: 20px;
+    font-weight: 600;
+    font-size: 2rem;
+  }
+  .article-inline {
+    border-bottom: none;
+    max-width: 500px;
+  }
+
+  .cart-product {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid $grey;
+    box-sizing: border-box;
+  }
+}
+.cart-quantity {
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+
+  button {
+    background: none;
+    border: none;
+    color: #000;
+  }
+}
+
+.orders {
   .order {
     width: 100%;
     padding: 50px 30px;
@@ -201,49 +248,96 @@ a {
       display: none;
     }
 
-    .order-article {
-      margin-top: 30px;
-      width: 100%;
-      display: flex;
-      align-items: flex-start;
-      gap: 30px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid $grey;
-
-      img {
-        width: 100px;
-        border-radius: 10px;
-      }
-
-      .order-article-details {
-        flex: 1;
-        display: flex;
-        align-items: flex-start;
-        justify-content: space-between;
-
-        h4 {
-          margin: 0;
-          font-weight: 600;
-          font-size: 1rem;
-        }
-
-        p {
-          font-size: 1rem;
-          margin: 0;
-        }
-
-        .brand {
-          font-size: 0.8rem;
-          color: $grey;
-        }
-      }
-    }
-
     .order-footer {
       display: flex;
       align-items: center;
       justify-content: space-between;
       font-weight: 700;
+    }
+  }
+}
+
+.article-inline {
+  margin-top: 30px;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid $grey;
+
+  img {
+    width: 100px;
+    border-radius: 10px;
+  }
+
+  .article-inline-details {
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    h4 {
+      margin: 0;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    p {
+      font-size: 1rem;
+      margin: 0;
+    }
+
+    .article-inline-brand {
+      font-size: 0.8rem;
+      color: $grey;
+    }
+  }
+}
+
+.carts-footer {
+  display: flex;
+  background: #fff;
+  width: 100%;
+  justify-content: center;
+  padding-bottom: 30px;
+}
+
+.modal {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  .modal-container {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    width: 500px;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 30px;
+    border: 1px solid #000;
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      input {
+        border: 1px solid #b7b7b7;
+        background: #eeeeee;
+        color: #000;
+        font-size: 1rem;
+        padding: 10px 20px;
+      }
+    }
+
+    .btn-group {
+      margin-top: 20px;
+      gap: 10px;
+      display: flex;
+      flex-direction: column;
     }
   }
 }
@@ -268,14 +362,20 @@ a {
     margin-top: 20px;
   }
 
+  .carts,
   .orders {
     padding: 50px 100px;
   }
 }
 
 @media screen and (max-width: 900px) {
+  .carts,
   .orders {
     padding: 50px 50px;
+  }
+
+  .carts .cart-product {
+    gap: 30px;
   }
 }
 
@@ -289,20 +389,28 @@ a {
       }
     }
   }
+
+  .cart-quantity {
+    font-size: 0.8rem;
+  }
+
+  .carts,
   .orders {
     padding: 50px 10px 50px 10px;
   }
 
-  .orders .order .order-article img {
+  /*.orders .order */
+  .article-inline img {
     width: 70px;
   }
 
-  .orders .order .order-article .order-article-details .article-name {
+  /*.orders .order */
+  .article-inline .article-inline-details .article-inline-name {
     font-size: 1rem;
   }
 
   .order-info p,
-  .orders .order .order-article .order-article-details p.article-price,
+  .article-inline .article-inline-details p.article-inline-price,
   .orders .order .order-button {
     font-size: 0.8rem;
   }
@@ -312,11 +420,21 @@ a {
     font-size: 1.5rem;
   }
 
-  .orders .order {
+  .orders .order,
+  .carts .cart {
     padding-bottom: 10px;
   }
 
   .orders .order:last-child {
     padding-bottom: 30px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .carts .cart-product {
+    gap: 25px;
+  }
+  .article-inline .article-inline-details .article-inline-name {
+    font-size: 0.8rem;
   }
 }
