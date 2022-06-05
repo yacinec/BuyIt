@@ -1,9 +1,5 @@
-import { User } from './User';
-import { Article } from './Article';
-import { Order } from './Order';
+import { UserModel } from "./UserModel";
+import { ArticleModel } from "./ArticleModel";
+import { OrderModel } from "./OrderModel";
 
-export {
-  User,
-  Article,
-  Order
-};
+export { UserModel, ArticleModel, OrderModel };
