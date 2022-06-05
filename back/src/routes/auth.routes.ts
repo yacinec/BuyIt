@@ -2,7 +2,7 @@ import { Router, Request, Response, NextFunction } from "express";
 
 import { ApiError } from "../errors";
 import { AuthController } from "../controllers";
-import { connectMiddlewares, authMiddleware } from "../middlewares";
+import { connectMiddlewares, refreshTokenMiddlewares } from "../middlewares";
 
 const authRouter = Router();
 
@@ -38,11 +38,8 @@ authRouter.post("/sign-in", connectMiddlewares, async (req, res, next) => {
   res.json(data);
 });
 
-authRouter.post("/refresh-token", authMiddleware, (req, res, next) => {
-  const data = AuthController.refreshToken(
-    req.body.user._id,
-    req.body.user.username
-  );
+authRouter.post("/refresh-token", refreshTokenMiddlewares, (req, res, next) => {
+  const data = AuthController.refreshToken(req.body._id, req.body.username);
 
   if (data instanceof ApiError) {
     next(data);
