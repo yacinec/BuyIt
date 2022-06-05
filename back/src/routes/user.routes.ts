@@ -1,9 +1,14 @@
 import { Router } from "express";
 import { UserController } from "../controllers";
 import { ApiError } from "../errors";
-import { userCreateMiddleware, idMiddleware } from "../middlewares";
+import {
+  userCreateMiddleware,
+  idMiddleware,
+  apiMiddleware,
+} from "../middlewares";
 
 const userRouter = Router();
+userRouter.use(apiMiddleware);
 
 userRouter.post("/create", userCreateMiddleware, async (req, res, next) => {
   const data = await UserController.create(req.body.username);

@@ -1,9 +1,14 @@
 import { Router } from "express";
 import { ArticleController } from "../controllers";
 import { ApiError } from "../errors";
-import { articleCreateMiddleware, idMiddleware } from "../middlewares";
+import {
+  apiMiddleware,
+  articleCreateMiddleware,
+  idMiddleware,
+} from "../middlewares";
 
 const articleRouter = Router();
+articleRouter.use(apiMiddleware);
 
 articleRouter.post(
   "/create",

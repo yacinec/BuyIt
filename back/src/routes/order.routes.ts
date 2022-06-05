@@ -1,13 +1,18 @@
 import { Router } from "express";
 import { OrderController } from "../controllers";
 import { ApiError } from "../errors";
-import { orderCreateMiddleware, idMiddleware } from "../middlewares";
+import {
+  orderCreateMiddleware,
+  idMiddleware,
+  apiMiddleware,
+} from "../middlewares";
 
 const orderRouter = Router();
+orderRouter.use(apiMiddleware);
 
 orderRouter.post("/create", orderCreateMiddleware, async (req, res, next) => {
   const data = await OrderController.create(
-    req.body.articlesId,
+    req.body.articles,
     req.body.address,
     req.body.userId
   );

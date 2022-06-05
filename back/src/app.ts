@@ -20,16 +20,3 @@ app.listen(PORT || 5000, () => {
   console.log(`Server started on port ${PORT}`);
   connectDB();
 });
-
-/*
-find all articles
-
-
-find one article
-
-
-find all orders by user id
-
-create order
-
-*/

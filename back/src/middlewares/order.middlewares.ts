@@ -7,9 +7,9 @@ export const orderCreateMiddleware = (
   res: Response,
   next: NextFunction
 ): void => {
-  const { articlesId, address, userId } = req.body;
+  const { articles, address, userId } = req.body;
 
-  if (!articlesId || !address || !userId) {
+  if (!articles || !address || !userId) {
     next(ApiError.badRequest("Wrong parameters."));
     return;
   }
