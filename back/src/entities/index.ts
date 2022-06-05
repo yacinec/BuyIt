@@ -1,13 +1,15 @@
 import { TokenInfoEntity } from "./TokenInfoEntity";
 import { UserEntity } from "./UserEntity";
-import { ConnectUserEntity } from "./ConnectUserEntity";
 import { SignInUserEntity } from "./SignInUserEntity";
 import { AccessTokenEntity } from "./AccessTokenEntity";
+import { ArticleEntity } from "./ArticleEntity";
+import { OrderEntity } from "./OrderEntity";
 
 export {
   TokenInfoEntity,
   UserEntity,
-  ConnectUserEntity,
   SignInUserEntity,
   AccessTokenEntity,
+  ArticleEntity,
+  OrderEntity,
 };

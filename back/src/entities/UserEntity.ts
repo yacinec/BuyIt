@@ -3,5 +3,5 @@
  */
 export type UserEntity = {
   _id: string;
-  username: string;
+  username?: string;
 };

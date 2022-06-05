@@ -20,7 +20,6 @@ const orderSchema = new mongoose.Schema({
     type: String,
     enum: ["PREPAR", "ONROAD", "ARRIVE"],
     default: "PREPAR",
-    required: true,
   },
   address: String,
   userRef: {

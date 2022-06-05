@@ -1,4 +1,4 @@
-export class ConnectUserDto {
+export class AuthUserDto {
   constructor(private username: string, private password: string) {}
 
   public get_username() {

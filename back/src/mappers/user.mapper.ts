@@ -1,16 +1,14 @@
-import { UserEntity, SignInUserEntity, ConnectUserEntity } from "../entities";
+import { UserDto } from "../dtos";
+import { UserEntity, SignInUserEntity } from "../entities";
 
 /**
- * Builds 'ConnectUserEntity' object.
+ * Builds 'UserDto' object.
+ * @param _id {string}
  * @param username {string}
- * @param password {string}
- * @returns {ConnectUserEntity}
+ * @returns {UserDto}
  */
-export const toConnectUserEntity = (
-  username: string,
-  password: string
-): ConnectUserEntity => {
-  return { username: username, password: password };
+export const toUserDto = (_id: string, username = ""): UserDto => {
+  return new UserDto(_id, username);
 };
 
 /**
@@ -19,7 +17,7 @@ export const toConnectUserEntity = (
  * @param username {string}
  * @returns {UserEntity}
  */
-export const toUserEntity = (_id: string, username: string): UserEntity => {
+export const toUserEntity = (_id: string, username = ""): UserEntity => {
   return { _id: _id, username: username };
 };
 

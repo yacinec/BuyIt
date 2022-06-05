@@ -1,11 +1,9 @@
 import { Request, Response, NextFunction } from "express";
 
-import { ACCESS_TOKEN_INFO } from "../config";
 import { ApiError } from "../errors";
-import { verifyToken } from "../utils";
 
 /**
- * Authenficates the user with a given token.
+ * Checks if the username and password passed are correct.
  * @param req {Request}
  * @param res {Response}
  * @param next {NextFunction}
@@ -16,24 +14,12 @@ export const authMiddleware = (
   res: Response,
   next: NextFunction
 ): void => {
-  const authHeader = req.headers["authorization"];
+  const { username, password } = req.body;
 
-  if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    next(ApiError.unauthorized("Token is expired."));
+  if (!username || !password) {
+    next(ApiError.badRequest("Username or password is empty."));
     return;
   }
 
-  const token = authHeader.substring(7, authHeader.length);
-
-  if (!token) {
-    next(ApiError.unauthorized("Token is expired."));
-    return;
-  }
-
-  try {
-    verifyToken(token, ACCESS_TOKEN_INFO);
-    next();
-  } catch (err) {
-    next(ApiError.unauthorized("Token is expired."));
-  }
+  next();
 };

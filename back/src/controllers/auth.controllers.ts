@@ -1,7 +1,8 @@
-import { ConnectUserDto, UserDto } from "../dtos";
+import { AuthUserDto } from "../dtos";
 import { ApiError } from "../errors";
 import { AuthService } from "../services";
 import { UserEntity, SignInUserEntity, AccessTokenEntity } from "../entities";
+import { toRefreshTokenDto } from "../mappers";
 
 /**
  * Signs up the user.
@@ -13,7 +14,7 @@ const signUp = async (
   username: string,
   password: string
 ): Promise<ApiError | UserEntity> => {
-  return await AuthService.saveNewUser(new ConnectUserDto(username, password));
+  return await AuthService.signUp(new AuthUserDto(username, password));
 };
 
 /**
@@ -26,20 +27,18 @@ const signIn = async (
   username: string,
   password: string
 ): Promise<ApiError | SignInUserEntity> => {
-  return await AuthService.connectUser(new ConnectUserDto(username, password));
+  return await AuthService.signIn(new AuthUserDto(username, password));
 };
 
 /**
- * Refreshes user token.
- * @param username {string}
- * @param password {string}
+ * Refreshes user access token.
+ * @param refreshToken {string}
  * @returns {AccessTokenEntity | ApiError}
  */
 const refreshToken = (
-  _id: string,
-  username: string
+  refreshTokenDto: string
 ): AccessTokenEntity | ApiError => {
-  return AuthService.generateNewAccessToken(new UserDto(_id, username));
+  return AuthService.refreshToken(toRefreshTokenDto(refreshTokenDto));
 };
 
 export default { signUp, signIn, refreshToken };

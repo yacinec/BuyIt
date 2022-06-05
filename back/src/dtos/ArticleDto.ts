@@ -1,11 +1,16 @@
 export class ArticleDto {
   constructor(
+    private _id: string,
     private name: string,
     private price: number,
     private img: string,
     private description: string,
     private brand: string
   ) {}
+
+  public get__id(): string {
+    return this._id;
+  }
 
   public get_name(): string {
     return this.name;

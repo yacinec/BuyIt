@@ -2,16 +2,16 @@ import { Router, Request, Response, NextFunction } from "express";
 
 import { ApiError } from "../errors";
 import { AuthController } from "../controllers";
-import { connectMiddlewares, refreshTokenMiddlewares } from "../middlewares";
+import { authMiddleware, refreshTokenMiddleware } from "../middlewares";
 
 const authRouter = Router();
 
 authRouter.post(
   "/sign-up",
-  connectMiddlewares,
+  authMiddleware,
   async (req: Request, res: Response, next: NextFunction) => {
     const data = await AuthController.signUp(
-      req.body.username,
+      req.body.username.toLowerCase(),
       req.body.password
     );
 
@@ -24,9 +24,9 @@ authRouter.post(
   }
 );
 
-authRouter.post("/sign-in", connectMiddlewares, async (req, res, next) => {
+authRouter.post("/sign-in", authMiddleware, async (req, res, next) => {
   const data = await AuthController.signIn(
-    req.body.username,
+    req.body.username.toLowerCase(),
     req.body.password
   );
 
@@ -38,8 +38,8 @@ authRouter.post("/sign-in", connectMiddlewares, async (req, res, next) => {
   res.json(data);
 });
 
-authRouter.post("/refresh-token", refreshTokenMiddlewares, (req, res, next) => {
-  const data = AuthController.refreshToken(req.body._id, req.body.username);
+authRouter.post("/refresh-token", refreshTokenMiddleware, (req, res, next) => {
+  const data = AuthController.refreshToken(req.body.token);
 
   if (data instanceof ApiError) {
     next(data);

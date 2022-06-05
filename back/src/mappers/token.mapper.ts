@@ -1,4 +1,14 @@
+import { RefreshTokenDto } from "../dtos";
 import { AccessTokenEntity } from "../entities";
+
+/**
+ * Builds 'RefresTokenDto' object.
+ * @param refreshToken {string}
+ * @returns {RefreshTokenDto}
+ */
+export const toRefreshTokenDto = (refreshToken: string): RefreshTokenDto => {
+  return new RefreshTokenDto(refreshToken);
+};
 
 /**
  * Builds 'AccessTokenEntity' object.

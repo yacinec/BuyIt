@@ -1,4 +1,6 @@
 import { authRouter } from "./auth.routes";
-import { apiRouter } from "./api.routes";
+import { articleRouter } from "./article.routes";
+import { orderRouter } from "./order.routes";
+import { userRouter } from "./user.routes";
 
-export { authRouter, apiRouter };
+export { authRouter, articleRouter, orderRouter, userRouter };

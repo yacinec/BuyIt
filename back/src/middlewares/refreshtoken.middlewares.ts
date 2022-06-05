@@ -1,13 +1,15 @@
 import { Request, Response, NextFunction } from "express";
 
-import { REFRESH_TOKEN_INFO } from "../config";
 import { ApiError } from "../errors";
-import { verifyToken } from "../utils";
 
 /**
- * Checks if the token passed is correct.
+ * Checks if the refresh token passed is correct.
+ * @param req {Request}
+ * @param res {Response}
+ * @param next {NextFunction}
+ * @returns {void}
  */
-export const refreshTokenMiddlewares = (
+export const refreshTokenMiddleware = (
   req: Request,
   res: Response,
   next: NextFunction
@@ -26,11 +28,6 @@ export const refreshTokenMiddlewares = (
     return;
   }
 
-  try {
-    const user = verifyToken(token, REFRESH_TOKEN_INFO);
-    req.body = user;
-    next();
-  } catch (err) {
-    next(ApiError.unauthorized("Token is expired."));
-  }
+  req.body = token;
+  next();
 };

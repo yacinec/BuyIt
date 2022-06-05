@@ -1,6 +1,7 @@
 import { UserDto } from "./UserDto";
-import { ConnectUserDto } from "./ConnectUserDto";
+import { AuthUserDto } from "./AuthUserDto";
 import { ArticleDto } from "./ArticleDto";
 import { OrderDto } from "./OrderDto";
+import { RefreshTokenDto } from "./RefreshTokenDto";
 
-export { UserDto, ConnectUserDto, ArticleDto, OrderDto };
+export { UserDto, AuthUserDto, ArticleDto, OrderDto, RefreshTokenDto };
