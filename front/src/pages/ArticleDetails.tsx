@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { Article, Brand } from "../types";
+import { Article } from "../types";
 
 export default function ArticleDetails() {
   const { id } = useParams();

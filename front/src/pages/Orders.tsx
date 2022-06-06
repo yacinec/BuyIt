@@ -1,16 +1,18 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import OrderCard from "../components/OrderCard";
+
 import { get_all_orders } from "../redux/action-creators";
 import { getOrders } from "../services/order.service";
 import { Order } from "../types";
 
+import { OrderCard } from "../components";
+
 export default function Orders() {
+  const dispatch = useDispatch();
   const orders = useSelector((state: any) => state.orders.orders);
   const { userId, accessToken } = useSelector((state: any) => {
     return { userId: state.auth.uid, accessToken: state.auth.accessToken };
   });
-  const dispatch = useDispatch();
 
   const fetchOrders = async () => {
     const orders = await getOrders(userId, accessToken);
@@ -20,8 +22,6 @@ export default function Orders() {
   useEffect(() => {
     fetchOrders();
   }, []);
-
-  console.log(orders);
 
   return (
     <div className='orders'>

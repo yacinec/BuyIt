@@ -29,7 +29,6 @@ root.render(
       <Provider store={store}>
         <Navbar />
         <Routes>
-          {/* <Route path='/' element={<Articles />}></Route> */}
           <Route
             path='/'
             element={
@@ -60,9 +59,6 @@ root.render(
               />
             }
           />
-          {/* <Route path='/signin' element={<SignIn />}></Route> */}
-          {/* <Route path='/signup' element={<SignUp />}></Route> */}
-          {/* <Route path='/orders' element={<Orders />}></Route> */}
           <Route
             path='/orders'
             element={
@@ -73,8 +69,6 @@ root.render(
               />
             }
           />
-
-          {/* <Route path='/cart' element={<Carts />}></Route> */}
           <Route
             path='/cart'
             element={
@@ -95,7 +89,6 @@ root.render(
               />
             }
           />
-          {/* <Route path='/article/:id' element={<ArticleDetails />}></Route> */}
         </Routes>
       </Provider>
     </BrowserRouter>

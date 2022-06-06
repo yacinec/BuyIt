@@ -1,9 +1,11 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import ArticleCard from "../components/ArticleCard";
+
+import { get_all_articles } from "../redux/action-creators";
 import { getArticles } from "../services/article.service";
 import Article from "../types/Article";
-import { get_all_articles } from "../redux/action-creators";
+
+import { ArticleCard } from "../components";
 
 export default function Articles() {
   const articles = useSelector((state: any) => state.articles.articles);

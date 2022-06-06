@@ -12,7 +12,7 @@ interface CartAction {
     | ActionType.REMOVE_ARTICLE_CART
     | ActionType.UPDATE_ARTICLE_CART
     | ActionType.ADD_ARTICLE_CART
-    | ActionType.CLEAR;
+    | ActionType.CLEAR_CART;
   payload?: any;
 }
 

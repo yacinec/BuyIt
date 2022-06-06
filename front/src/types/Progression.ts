@@ -1,7 +1,7 @@
 enum Progression {
-  PREPAR = "On preparation",
-  ONROAD = "On the way",
-  ARRIVE = "Arrived",
+  PREPAR = "PREPAR",
+  ONROAD = "ONROAD",
+  ARRIVE = "ARRIVE",
 }
 
 export default Progression;

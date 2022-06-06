@@ -1,6 +1,10 @@
 import { Article, Cart, Order, Tokens } from "../../types";
 import ActionType from "../action-types";
 
+/**
+ *
+ * AUTH ACTIONS
+ */
 export const login = (uid: number, tokens: Tokens) => {
   return {
     type: ActionType.LOGIN,
@@ -21,6 +25,10 @@ export const refresh = (tokens: Tokens) => {
   };
 };
 
+/**
+ *
+ * CART ACTIONS
+ */
 export const increase_article_cart = (newCart: Cart) => {
   return {
     type: ActionType.INCREASE_ARTICLE_CART,
@@ -49,6 +57,17 @@ export const add_article_cart = (article: Article) => {
   };
 };
 
+export const clear_cart = () => {
+  return {
+    type: ActionType.CLEAR_CART,
+  };
+};
+
+/**
+ *
+ * ARTICLE ACTIONS
+ */
+
 export const get_all_articles = (allArticles: Array<Article>) => {
   return {
     type: ActionType.GET_ALL_ARTICLES,
@@ -56,22 +75,14 @@ export const get_all_articles = (allArticles: Array<Article>) => {
   };
 };
 
+/**
+ *
+ * ORDER ACTIONS
+ */
+
 export const get_all_orders = (orders: Array<Order>) => {
   return {
     type: ActionType.GET_ALL_ORDERS,
     payload: orders,
-  };
-};
-
-export const create_order = (orders: Array<Order>) => {
-  return {
-    type: ActionType.GET_ALL_ORDERS,
-    payload: orders,
-  };
-};
-
-export const clear_order = () => {
-  return {
-    type: ActionType.CLEAR,
   };
 };

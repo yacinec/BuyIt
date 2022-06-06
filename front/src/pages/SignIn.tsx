@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import Button from "../components/Button";
+
 import { login } from "../redux/action-creators";
 import { auth_login } from "../services/auth.service";
 import { Tokens, User } from "../types";
+
+import { Button } from "../components";
 
 export default function SignIn() {
   const [username, setUsername] = useState("");

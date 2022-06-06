@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import Button from "../components/Button";
+import toast, { Toaster } from "react-hot-toast";
+
 import { auth_register } from "../services/auth.service";
 import { User } from "../types";
-import toast, { Toaster } from "react-hot-toast";
+
+import { Button } from "../components";
 
 export default function SignUp() {
   const [username, setUsername] = useState("");
