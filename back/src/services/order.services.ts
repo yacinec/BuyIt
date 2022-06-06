@@ -2,7 +2,7 @@ import { OrderDto } from "../dtos";
 import { OrderEntity } from "../entities";
 import { ApiError } from "../errors";
 import { toArticleEntity, toOrderEntity, toUserEntity } from "../mappers";
-import { OrderModel } from "../models";
+import { ArticleModel, OrderModel } from "../models";
 
 const create = async (orderDto: OrderDto): Promise<ApiError | OrderEntity> => {
   try {
@@ -126,11 +126,32 @@ const remove = async (_id: string): Promise<ApiError | OrderEntity> => {
 
 const findAllUser = async (_id: string): Promise<ApiError | OrderEntity[]> => {
   try {
-    const orders: OrderEntity[] = await OrderModel.find({
+    const orders = await OrderModel.find({
       userRef: _id,
-    }).select("-__v");
+    })
+      .select("-__v")
+      .populate("articlesRef");
 
-    return orders;
+    return orders.map((order) =>
+      toOrderEntity(
+        order._id,
+        order.articlesRef.map((article: any) =>
+          toArticleEntity(
+            article._id,
+            article.name,
+            article.price,
+            article.img,
+            article.description,
+            article.brand
+          )
+        ),
+        order.createdAt,
+        order.modifiedAt,
+        order.progression,
+        order.address,
+        toUserEntity(order.userRef.toString())
+      )
+    );
   } catch (err) {
     return ApiError.internal("Internal Server error.");
   }
