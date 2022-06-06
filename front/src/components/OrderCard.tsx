@@ -3,11 +3,7 @@ import { Article, Order, Progression } from "../types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import moment from "moment";
-import {
-  solid,
-  //regular,
-  //brands,
-} from "@fortawesome/fontawesome-svg-core/import.macro";
+import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 import ArticleInline from "./ArticleInline";
 
 const OrderCard: React.FC<Order> = (props) => {
@@ -38,7 +34,6 @@ const OrderCard: React.FC<Order> = (props) => {
   return (
     <div className='order'>
       <OrderHeader
-        index={1}
         {...props}
         handleClick={handleClick}
         orderButtonRef={orderButtonRef}
@@ -57,7 +52,7 @@ const OrderCard: React.FC<Order> = (props) => {
 export default OrderCard;
 
 interface OrderHeaderProps {
-  index: number;
+  _id: string;
   progression: Progression;
   createdAt: Date;
   modifiedAt: Date;
@@ -99,19 +94,20 @@ const OrderHeader: React.FC<OrderHeaderProps> = (props) => {
         );
     }
   };
-
   return (
     <header className='order-header'>
-      <h3 className='order-id'>Order #{props.index}</h3>
+      <h3 className='order-id'>
+        Order #{props._id.substring(props._id.length - 6, props._id.length)}
+      </h3>
       <div className='order-info'>
         {status()}
         <p>
           <span className='bold'>Date:</span>{" "}
-          {moment(props.createdAt).format("MMMM Do YYYY")}
+          {moment(new Date(props.createdAt)).format("MMMM Do YYYY")}
         </p>
         <p>
           <span className='bold'>Last update:</span>{" "}
-          {moment(props.modifiedAt).format("MMMM Do YYYY")}
+          {moment(new Date(props.modifiedAt)).format("MMMM Do YYYY")}
         </p>
       </div>
       <button
@@ -124,28 +120,6 @@ const OrderHeader: React.FC<OrderHeaderProps> = (props) => {
     </header>
   );
 };
-
-/*
-interface OrderArticleProps {
-  index: number;
-  article: Article;
-}
-
-const OrderArticle: React.FC<OrderArticleProps> = (props) => {
-  return (
-    <div key={props.index} className='article-inline'>
-      <img src={props.article.img} alt={props.article.name} />
-      <div className='article-inline-details'>
-        <div>
-          <h4 className='article-inline-name'>{props.article.name}</h4>
-          <p className='article-inline-brand'>{props.article.brand}</p>
-        </div>
-        <p className='article-inline-price'>${props.article.price}</p>
-      </div>
-    </div>
-  );
-};
-*/
 
 interface OrderFooterProps {
   total: number;

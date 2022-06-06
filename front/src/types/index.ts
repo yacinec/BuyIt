@@ -6,5 +6,4 @@ import User from "./User";
 import Tokens from "./Tokens";
 import Cart from "./Cart";
 
-export { Article, Progression, Order, Brand };
-export type { User, Tokens, Cart };
+export { Tokens, Cart, Article, Progression, Order, Brand, User };

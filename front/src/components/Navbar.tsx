@@ -1,25 +1,41 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  solid,
-  regular,
-  brands,
-} from "@fortawesome/fontawesome-svg-core/import.macro";
+import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../redux/action-creators";
 
 export default function Navbar() {
+  const dispatch = useDispatch();
+  const isAuthenticated = useSelector((state: any) => state.auth.accessToken);
+
+  const handleLogOut = () => {
+    dispatch(logout());
+  };
+
+  if (!isAuthenticated) {
+    return (
+      <nav className='navbar'>
+        <h1>
+          Buy<span className='purple'>It</span>
+        </h1>
+        <ul className='links'>
+          <li>
+            <Link to='/signin'>Sign In</Link>
+          </li>
+          <li>
+            <Link to='/signup'>Sign Up</Link>
+          </li>
+        </ul>
+      </nav>
+    );
+  }
+
   return (
     <nav className='navbar'>
       <h1>
         Buy<span className='purple'>It</span>
       </h1>
       <ul className='links'>
-        <li>
-          <Link to='/signin'>Sign In</Link>
-        </li>
-        <li>
-          <Link to='/signup'>Sign Up</Link>
-        </li>
         <li>
           <Link to='/'>
             <FontAwesomeIcon icon={solid("home")} />
@@ -36,9 +52,9 @@ export default function Navbar() {
           </Link>
         </li>
         <li>
-          <Link to='/signout'>
+          <a href='' onClick={handleLogOut}>
             <FontAwesomeIcon icon={solid("right-from-bracket")} />
-          </Link>
+          </a>
         </li>
       </ul>
     </nav>

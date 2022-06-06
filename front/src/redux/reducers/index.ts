@@ -1,9 +1,13 @@
+import articleReducer from "./articleReducer";
 import authReducer from "./authReducer";
 import cartReducer from "./cartReducer";
+import orderReducer from "./orderReducer";
 
 const reducers = {
   auth: authReducer,
-  cart: cartReducer,
+  carts: cartReducer,
+  articles: articleReducer,
+  orders: orderReducer,
 };
 
 export default reducers;

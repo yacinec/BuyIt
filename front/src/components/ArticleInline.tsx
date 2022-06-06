@@ -7,7 +7,7 @@ interface ArticleInlineProps {
 
 const ArticleInline: React.FC<ArticleInlineProps> = (props) => {
   return (
-    <div key={props.index} className='article-inline'>
+    <div className='article-inline'>
       <img src={props.article.img} alt={props.article.name} />
       <div className='article-inline-details'>
         <div>
