@@ -2,7 +2,6 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { add_article_cart } from "../redux/action-creators";
-import { Cart } from "../types";
 import Article from "../types/Article";
 import Button from "./Button";
 import toast, { Toaster } from "react-hot-toast";

@@ -6,14 +6,19 @@ import { getArticles } from "../services/article.service";
 import Article from "../types/Article";
 
 import { ArticleCard } from "../components";
+import { Tokens } from "../types";
 
 export default function Articles() {
   const articles = useSelector((state: any) => state.articles.articles);
-  const accessToken = useSelector((state: any) => state.auth.accessToken);
+  const { accessToken, refreshToken, expiresIn } = useSelector((state: any) => {
+    return { ...state.auth };
+  });
   const dispatch = useDispatch();
 
   const fetchArticles = async () => {
-    const articles = await getArticles(accessToken);
+    const articles = await getArticles(
+      new Tokens(accessToken, refreshToken, expiresIn)
+    );
     dispatch(get_all_articles(articles));
   };
 

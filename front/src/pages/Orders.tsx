@@ -3,19 +3,29 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { get_all_orders } from "../redux/action-creators";
 import { getOrders } from "../services/order.service";
-import { Order } from "../types";
+import { Order, Tokens } from "../types";
 
 import { OrderCard } from "../components";
 
 export default function Orders() {
   const dispatch = useDispatch();
   const orders = useSelector((state: any) => state.orders.orders);
-  const { userId, accessToken } = useSelector((state: any) => {
-    return { userId: state.auth.uid, accessToken: state.auth.accessToken };
-  });
+  const { userId, accessToken, refreshToken, expiresIn } = useSelector(
+    (state: any) => {
+      return {
+        userId: state.auth.uid,
+        accessToken: state.auth.accessToken,
+        refreshToken: state.auth.refreshToken,
+        expiresIn: state.auth.expiresIn,
+      };
+    }
+  );
 
   const fetchOrders = async () => {
-    const orders = await getOrders(userId, accessToken);
+    const orders = await getOrders(
+      userId,
+      new Tokens(accessToken, refreshToken, expiresIn)
+    );
     dispatch(get_all_orders(orders));
   };
 

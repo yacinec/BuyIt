@@ -10,7 +10,7 @@ import {
   update_article_cart,
 } from "../redux/action-creators";
 import { createOrder } from "../services/order.service";
-import { Cart, Order } from "../types";
+import { Cart, Order, Tokens } from "../types";
 
 import {
   ButtonIcon,
@@ -28,9 +28,16 @@ export default function Carts() {
   const [address, setAddress] = useState("");
 
   const carts = useSelector((state: any) => state.carts.carts);
-  const { accessToken, userId } = useSelector((state: any) => {
-    return { accessToken: state.auth.accessToken, userId: state.auth.uid };
-  });
+  const { userId, accessToken, refreshToken, expiresIn } = useSelector(
+    (state: any) => {
+      return {
+        userId: state.auth.uid,
+        accessToken: state.auth.accessToken,
+        refreshToken: state.auth.refreshToken,
+        expiresIn: state.auth.expiresIn,
+      };
+    }
+  );
 
   /**
    * Make the payment
@@ -45,7 +52,11 @@ export default function Carts() {
           return cart.article;
         });
 
-        await createOrder(new Order(articles, address), userId, accessToken);
+        await createOrder(
+          new Order(articles, address),
+          userId,
+          new Tokens(accessToken, refreshToken, expiresIn)
+        );
         dispatch(clear_cart());
         setIsLoading(false);
         setIsModalOpened(false);

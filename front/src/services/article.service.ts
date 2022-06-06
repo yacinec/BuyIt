@@ -1,13 +1,14 @@
+import { check_access_token } from "../middlewares";
+import { Tokens } from "../types";
+
 const API_URL = "http://localhost:1234/articles";
 
-export const getArticles = async (accessToken: string) => {
+export const getArticles = async (tokens: Tokens) => {
+  const headers = await check_access_token(tokens);
+
   return fetch(`${API_URL}/find-all`, {
     method: "GET",
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-      "Content-type": "application/json",
-      "Access-Control-Allow-Origin": "*",
-    },
+    headers,
   })
     .then((response) => {
       return response.json();
