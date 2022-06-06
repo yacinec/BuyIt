@@ -5,7 +5,8 @@ import CartFooter from "./CartFooter";
 import CartModal from "./CartModal";
 import Navbar from "./Navbar";
 import OrderCard from "./OrderCard";
-import { PrivateRoute } from "./PrivateRoute";
+import AuthRoutes from "./AuthRoutes";
+import NotAuthRoutes from "./NotAuthRoutes";
 import ButtonIcon from "./ButtonIcon";
 
 export {
@@ -16,6 +17,7 @@ export {
   CartModal,
   Navbar,
   OrderCard,
-  PrivateRoute,
+  AuthRoutes,
+  NotAuthRoutes,
   ButtonIcon,
 };

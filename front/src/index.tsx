@@ -16,8 +16,8 @@ import {
   Carts,
   ArticleDetails,
 } from "./pages";
-import Navbar from "./components/Navbar";
-import { PrivateRoute } from "./components/PrivateRoute";
+
+import { Navbar, NotAuthRoutes, AuthRoutes } from "./components";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -29,66 +29,16 @@ root.render(
       <Provider store={store}>
         <Navbar />
         <Routes>
-          <Route
-            path='/'
-            element={
-              <PrivateRoute
-                component={Articles}
-                redirection='/signin'
-                requiredAuth={true}
-              />
-            }
-          />
-          <Route
-            path='/signup'
-            element={
-              <PrivateRoute
-                component={SignUp}
-                redirection='/'
-                requiredAuth={false}
-              />
-            }
-          />
-          <Route
-            path='/signin'
-            element={
-              <PrivateRoute
-                component={SignIn}
-                redirection='/'
-                requiredAuth={false}
-              />
-            }
-          />
-          <Route
-            path='/orders'
-            element={
-              <PrivateRoute
-                component={Orders}
-                redirection='/signin'
-                requiredAuth={true}
-              />
-            }
-          />
-          <Route
-            path='/cart'
-            element={
-              <PrivateRoute
-                component={Carts}
-                redirection='/signin'
-                requiredAuth={true}
-              />
-            }
-          />
-          <Route
-            path='/article/:id'
-            element={
-              <PrivateRoute
-                component={ArticleDetails}
-                redirection='/signin'
-                requiredAuth={true}
-              />
-            }
-          />
+          <Route element={<AuthRoutes />}>
+            <Route path='/' element={<Articles />} />
+            <Route path='/orders' element={<Orders />} />
+            <Route path='/cart' element={<Carts />} />
+            <Route path='/article/:id' element={<ArticleDetails />} />
+          </Route>
+          <Route element={<NotAuthRoutes />}>
+            <Route path='/signup' element={<SignUp />} />
+            <Route path='/signin' element={<SignIn />} />
+          </Route>
         </Routes>
       </Provider>
     </BrowserRouter>
