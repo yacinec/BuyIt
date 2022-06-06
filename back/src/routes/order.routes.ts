@@ -74,7 +74,7 @@ orderRouter.delete("/remove", idMiddleware, async (req, res, next) => {
   res.json(data);
 });
 
-orderRouter.get("/find-all-user", idMiddleware, async (req, res, next) => {
+orderRouter.post("/find-all-user", idMiddleware, async (req, res, next) => {
   const data = await OrderController.findAllUser(req.body._id);
 
   if (data instanceof ApiError) {

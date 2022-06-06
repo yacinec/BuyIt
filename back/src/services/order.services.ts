@@ -135,21 +135,12 @@ const findAllUser = async (_id: string): Promise<ApiError | OrderEntity[]> => {
     return orders.map((order) =>
       toOrderEntity(
         order._id,
-        order.articlesRef.map((article: any) =>
-          toArticleEntity(
-            article._id,
-            article.name,
-            article.price,
-            article.img,
-            article.description,
-            article.brand
-          )
-        ),
+        order.articlesRef,
         order.createdAt,
         order.modifiedAt,
         order.progression,
         order.address,
-        toUserEntity(order.userRef.toString())
+        order.userRef
       )
     );
   } catch (err) {
