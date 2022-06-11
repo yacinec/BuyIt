@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useForm, SubmitHandler } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
 
 import { auth_register } from "../services/auth.service";
@@ -7,21 +8,41 @@ import { User } from "../types";
 
 import { Button } from "../components";
 
-export default function SignUp() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const notify = () => toast.success("Your account has been created!");
+interface SignUpInputs {
+  username: string;
+  password: string;
+}
 
-  const handleClick = async (event: any) => {
-    event.preventDefault();
-    if (username && password) {
-      const user = new User(username, password);
+export default function SignUp() {
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<SignUpInputs>();
+  const onSubmit: SubmitHandler<SignUpInputs> = (data) => handleClick(data);
+
+  const handleClick = async (data: any) => {
+    if (data.username && data.password) {
+      const user = new User(data.username, data.password);
       const result = await auth_register(user);
-      if (result) {
-        notify();
+      if (result.message) {
+        toast.error("Username and pasword do not match!");
       }
+
+      if (result) {
+        toast.success("Your account has been created!");
+      }
+    } else {
+      toast.error("All fields need to be filled!");
     }
   };
+
+  useEffect(() => {
+    if (errors.password || errors.username) {
+      toast.error("All fields need to be filled!");
+    }
+    return () => {};
+  }, [errors]);
 
   return (
     <div className='sign signup'>
@@ -30,16 +51,20 @@ export default function SignUp() {
       </div>
       <main>
         <h2>Sign Up</h2>
-        <form onSubmit={handleClick}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <input
             type='text'
             placeholder='Username'
-            onChange={(event) => setUsername(event.target.value)}
+            {...register("username", {
+              required: true,
+              minLength: 4,
+              maxLength: 20,
+            })}
           />
           <input
             type='password'
             placeholder='Password'
-            onChange={(event) => setPassword(event.target.value)}
+            {...register("password", { required: true, minLength: 12 })}
           />
           <Button submit={true}>Register</Button>
         </form>

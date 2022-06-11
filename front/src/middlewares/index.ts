@@ -1,5 +1,4 @@
 import jwt from "jwt-decode";
-import moment from "moment";
 import { Tokens } from "../types";
 
 export const check_access_token = async (tokens: Tokens) => {
