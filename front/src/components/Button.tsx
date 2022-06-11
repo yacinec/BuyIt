@@ -12,7 +12,9 @@ const Button: React.FC<ButtonProps> = (props) => {
     <button
       type={props.submit ? "submit" : "button"}
       className='btn'
-      style={{ backgroundColor: props.color ? props.color : "#4338CA" }}
+      style={{
+        backgroundColor: props.color ? props.color : "#ef2c5a" /*"#4338CA"*/,
+      }}
       onClick={props.handleClick ? props.handleClick : () => {}}
     >
       {props.children}

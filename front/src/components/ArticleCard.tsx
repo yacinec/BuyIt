@@ -32,7 +32,8 @@ const ArticleCard: React.FC<Article> = (props) => {
           handleClick={() => {
             handleClickAddToCart(props);
           }}
-          color='#0D9488'
+          //color='#0D9488'
+          color='#000'
         >
           Add to cart
         </Button>

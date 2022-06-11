@@ -16,7 +16,7 @@ export default function Navbar() {
     return (
       <nav className='navbar'>
         <h1>
-          Buy<span className='purple'>It</span>
+          Buy<span className='pourpre'>It</span>
         </h1>
         <ul className='links'>
           <li>
@@ -33,7 +33,7 @@ export default function Navbar() {
   return (
     <nav className='navbar'>
       <h1>
-        Buy<span className='purple'>It</span>
+        Buy<span className='pourpre'>It</span>
       </h1>
       <ul className='links'>
         <li>
