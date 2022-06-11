@@ -5,9 +5,9 @@ BuyIt is strictly a fictitious project, it absolutly has not the goal to really 
 
 ## Stack
 
-- DB: MongoDb
-- Back End: Express
-- Front End: React
+- [DB: MongoDb](https://www.mongodb.com/)
+- [Back End: Express](https://github.com/yacinec/BuyIt/tree/main/back)
+- [Front End: React](https://github.com/yacinec/BuyIt/tree/main/front)
 
 ## Installation
 
@@ -27,3 +27,7 @@ After that, you will be able to run the backend:
 and then the frontend:
 
 `npm start`
+
+## Authors
+
+- [@yacinec](https://github.com/yacinec)
