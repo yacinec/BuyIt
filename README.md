@@ -1,5 +1,8 @@
 # BuyIt
 
+BuyIt is an hardware selling e-commerce website mockup.
+BuyIt is strictly a fictitious project, it absolutly has not the goal to really sell products. The objective is using modern technologies on a fictitious project.
+
 ## Stack
 
 - DB: MongoDb
