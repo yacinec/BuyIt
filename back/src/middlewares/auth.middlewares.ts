@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from "express";
 import { ApiError } from "../errors";
 
 /**
- * Checks if the username and password passed are correct.
+ * Checks the username and password existence in the request.
  * @param req {Request}
  * @param res {Response}
  * @param next {NextFunction}
@@ -21,5 +21,35 @@ export const authMiddleware = (
     return;
   }
 
+  next();
+};
+
+/**
+ * Checks the refresh token existence in the request.
+ * @param req {Request}
+ * @param res {Response}
+ * @param next {NextFunction}
+ * @returns {void}
+ */
+export const refreshTokenMiddleware = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): void => {
+  const authHeader = req.headers["authorization"];
+
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    next(ApiError.badRequest("Bad request."));
+    return;
+  }
+
+  const refreshToken = authHeader.split(" ")[1];
+
+  if (!refreshToken) {
+    next(ApiError.badRequest("Bad request."));
+    return;
+  }
+
+  req.body.refreshToken = refreshToken;
   next();
 };

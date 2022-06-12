@@ -1,6 +1,6 @@
-import { Response, Request, NextFunction } from 'express';
+import { Response, Request, NextFunction } from "express";
 
-import { ApiError } from '.';
+import { ApiError } from ".";
 
 /**
  * Sends HTTP error response.
@@ -21,6 +21,6 @@ export const apiErrorHandling = (
     res.status(err.code).json(err.message);
   } else {
     next();
-    res.status(500).json('Something went wrong.');
+    res.status(500).json("Something went wrong.");
   }
 };

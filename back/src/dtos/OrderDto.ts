@@ -3,20 +3,40 @@ import { UserDto } from ".";
 
 export class OrderDto {
   constructor(
-    private articles: ArticleDto[],
+    private _id: string,
+    private articlesRef: ArticleDto[],
+    private createdAt: Date,
+    private modifiedAt: Date,
+    private progression: string,
     private address: string,
-    private user: UserDto
+    private userRef: UserDto
   ) {}
 
-  public get_articles(): ArticleDto[] {
-    return this.articles;
+  public get__id() {
+    return this._id;
   }
 
-  public get_address(): string {
+  public get_articlesRef() {
+    return this.articlesRef;
+  }
+
+  public get_createdAt() {
+    return this.createdAt;
+  }
+
+  public get_modifiedAt() {
+    return this.modifiedAt;
+  }
+
+  public get_progression() {
+    return this.progression;
+  }
+
+  public get_address() {
     return this.address;
   }
 
-  public get_user(): UserDto {
-    return this.user;
+  public get_userRef() {
+    return this.userRef;
   }
 }

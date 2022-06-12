@@ -1,11 +1,11 @@
 import { Request, Response, NextFunction } from "express";
 
-import { ACCESS_TOKEN_INFO } from "../config";
+import { ACCESS_TOKEN_PRIVATE_KEY } from "../config";
 import { ApiError } from "../errors";
 import { verifyToken } from "../utils";
 
 /**
- * Authenficates the user with a given token.
+ * Checks the user authentication with a given token.
  * @param req {Request}
  * @param res {Response}
  * @param next {NextFunction}
@@ -23,15 +23,15 @@ export const apiMiddleware = (
     return;
   }
 
-  const token = authHeader.substring(7, authHeader.length);
+  const accessToken = authHeader.split(" ")[1];
 
-  if (!token) {
+  if (!accessToken) {
     next(ApiError.unauthorized("Token is expired."));
     return;
   }
 
   try {
-    const user = verifyToken(token, ACCESS_TOKEN_INFO);
+    const user = verifyToken(accessToken, ACCESS_TOKEN_PRIVATE_KEY);
 
     if (!user) {
       next(ApiError.unauthorized("Token is expired."));
@@ -39,18 +39,25 @@ export const apiMiddleware = (
 
     next();
   } catch (err) {
-    next(ApiError.internal("Internal Server Error."));
+    next(ApiError.internal("Token is expired."));
   }
 };
 
+/**
+ * Checks the object id existence in the request.
+ * @param req {Request}
+ * @param res {Response}
+ * @param next {NextFunction}
+ * @returns {void}
+ */
 export const idMiddleware = (
   req: Request,
   res: Response,
   next: NextFunction
 ): void => {
-  const { _id } = req.body;
+  const { id, userId } = req.params;
 
-  if (!_id) {
+  if (!id && !userId) {
     next(ApiError.badRequest("Object id is missing."));
     return;
   }

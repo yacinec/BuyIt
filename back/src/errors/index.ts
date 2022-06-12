@@ -1,4 +1,4 @@
 import { ApiError } from "./ApiError";
-import { apiErrorHandling } from "./apihandling.errors";
+import { apiErrorHandling } from "./apiHandling.errors";
 
 export { ApiError, apiErrorHandling };

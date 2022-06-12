@@ -1,11 +1,10 @@
-import { hashPassword, passwordIsCorrect } from "./../utils/hash.utils";
+import { hashPassword, comparePassword, passwordIsCorrect } from "./pwd.utils";
 import { generateToken, verifyToken } from "./jwt.utils";
-import { convertToSeconds } from "./timeConvertor.utils";
 
 export {
   hashPassword,
+  comparePassword,
   passwordIsCorrect,
   generateToken,
   verifyToken,
-  convertToSeconds,
 };

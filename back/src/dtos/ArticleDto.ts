@@ -8,27 +8,27 @@ export class ArticleDto {
     private brand: string
   ) {}
 
-  public get__id(): string {
+  public get__id() {
     return this._id;
   }
 
-  public get_name(): string {
+  public get_name() {
     return this.name;
   }
 
-  public get_price(): number {
+  public get_price() {
     return this.price;
   }
 
-  public get_img(): string {
+  public get_img() {
     return this.img;
   }
 
-  public get_description(): string {
+  public get_description() {
     return this.description;
   }
 
-  public get_brand(): string {
+  public get_brand() {
     return this.brand;
   }
 }
