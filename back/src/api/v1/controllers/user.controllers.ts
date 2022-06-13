@@ -1,7 +1,7 @@
 import { NextFunction, Response, Request } from "express";
 
 import { ApiError } from "../../../errors";
-import { toUserDto } from "../../../mappers";
+import { toOrderDto, toUserDto } from "../../../mappers";
 import { UserService } from "../services";
 
 /**
@@ -29,27 +29,6 @@ const findAll = async (req: Request, res: Response, next: NextFunction) => {
  */
 const findOne = async (req: Request, res: Response, next: NextFunction) => {
   const data = await UserService.findOne(req.params.id);
-
-  if (data instanceof ApiError) {
-    next(data);
-    return;
-  }
-
-  res.json(data);
-};
-
-/**
- * Retrieves all existing orders corresponding to the specified user id.
- * @param req {Request}
- * @param res {Response}
- * @param next {NextFunction}
- */
-const findAllOrders = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  const data = await UserService.findAllOrders(req.params.id);
 
   if (data instanceof ApiError) {
     next(data);
@@ -94,4 +73,51 @@ const remove = async (req: Request, res: Response, next: NextFunction) => {
   res.json(data);
 };
 
-export default { findAll, findOne, findAllOrders, update, remove };
+/**
+ * Retrieves all existing orders corresponding to the specified user id.
+ * @param req {Request}
+ * @param res {Response}
+ * @param next {NextFunction}
+ */
+const findAllOrders = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const data = await UserService.findAllOrders(req.params.id);
+
+  if (data instanceof ApiError) {
+    next(data);
+    return;
+  }
+
+  res.json(data);
+};
+
+/**
+ * Appends a new order with request data.
+ * @param req {Request}
+ * @param res {Response}
+ * @param next {NextFunction}
+ */
+const createOrder = async (req: Request, res: Response, next: NextFunction) => {
+  const orderDto = toOrderDto(
+    "",
+    req.body.articlesRef,
+    req.body.createdAt,
+    req.body.modifiedAt,
+    req.body.progression,
+    req.body.address,
+    req.params.id
+  );
+  const data = await UserService.createOrder(orderDto);
+
+  if (data instanceof ApiError) {
+    next(data);
+    return;
+  }
+
+  res.json(data);
+};
+
+export default { findAll, findOne, findAllOrders, update, remove, createOrder };

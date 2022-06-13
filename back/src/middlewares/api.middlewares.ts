@@ -55,9 +55,9 @@ export const idMiddleware = (
   res: Response,
   next: NextFunction
 ): void => {
-  const { id, userId } = req.params;
+  const { id } = req.params;
 
-  if (!id && !userId) {
+  if (!id) {
     next(ApiError.badRequest("Object id is missing."));
     return;
   }

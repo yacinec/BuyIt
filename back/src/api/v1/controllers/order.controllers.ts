@@ -5,32 +5,6 @@ import { OrderService } from "../services";
 import { toOrderDto } from "../../../mappers";
 
 /**
- * Appends a new order with request data.
- * @param req {Request}
- * @param res {Response}
- * @param next {NextFunction}
- */
-const create = async (req: Request, res: Response, next: NextFunction) => {
-  const orderDto = toOrderDto(
-    req.params.id,
-    req.body.articlesRef,
-    req.body.createdAt,
-    req.body.modifiedAt,
-    req.body.progression,
-    req.body.address,
-    req.body.userRef
-  );
-  const data = await OrderService.create(orderDto);
-
-  if (data instanceof ApiError) {
-    next(data);
-    return;
-  }
-
-  res.json(data);
-};
-
-/**
  * Retrieves the order corresponding to the specified id.
  * @param req {Request}
  * @param res {Response}
@@ -90,4 +64,4 @@ const remove = async (req: Request, res: Response, next: NextFunction) => {
   res.json(data);
 };
 
-export default { create, findOne, update, remove };
+export default { findOne, update, remove };

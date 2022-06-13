@@ -30,7 +30,7 @@ export const comparePassword = (
  * - with at least 12 characters;
  * - contains a mixture of both uppercase and lowercase letters;
  * - contains mixture of letters and numbers;
- * - includes at least one special character, e.g., ! @ # ? ].
+ * - includes at least one special character, e.g., ! @ # ? ] _.
  * @param password {string}
  * @return {boolean}
  */

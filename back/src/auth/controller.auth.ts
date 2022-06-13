@@ -12,7 +12,7 @@ import AuthService from "./service.auth";
  */
 const signUp = async (req: Request, res: Response, next: NextFunction) => {
   const authUserDto = new AuthUserDto(
-    req.body.username.toLowerCase(),
+    req.body.username.toLowerCase().trim(),
     req.body.password
   );
   const data = await AuthService.signUp(authUserDto);
@@ -33,7 +33,7 @@ const signUp = async (req: Request, res: Response, next: NextFunction) => {
  */
 const signIn = async (req: Request, res: Response, next: NextFunction) => {
   const authUserDto = new AuthUserDto(
-    req.body.username.toLowerCase(),
+    req.body.username.toLowerCase().trim(),
     req.body.password
   );
   const data = await AuthService.signIn(authUserDto);

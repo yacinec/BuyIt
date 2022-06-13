@@ -15,9 +15,14 @@ import {
 const userRoutes = Router();
 userRoutes.get("/", UserController.findAll);
 userRoutes.get("/:id", idMiddleware, UserController.findOne);
-userRoutes.get("/:id/orders/", UserController.findAllOrders);
 userRoutes.put("/:id", idMiddleware, UserController.update);
 userRoutes.delete("/:id", idMiddleware, UserController.remove);
+userRoutes.get("/:id/orders/", UserController.findAllOrders);
+userRoutes.post(
+  "/:id/orders/",
+  [idMiddleware, orderAttExistMiddleware],
+  UserController.createOrder
+);
 
 // Article routes.
 const articleRoutes = Router();
@@ -29,7 +34,6 @@ articleRoutes.delete("/:id", idMiddleware, ArticleController.remove);
 
 // Order routes.
 const orderRoutes = Router();
-orderRoutes.post("/", orderAttExistMiddleware, OrderController.create);
 orderRoutes.get("/:id", idMiddleware, OrderController.findOne);
 orderRoutes.put("/:id", idMiddleware, OrderController.update);
 orderRoutes.delete("/:id", idMiddleware, OrderController.remove);
