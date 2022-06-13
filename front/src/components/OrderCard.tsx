@@ -1,7 +1,8 @@
 import React, { useRef } from "react";
 import { Article, Order } from "../types";
+import OrderArticle from "../types/OrderArticle";
 
-import ArticleInline from "./ArticleInline";
+import OrderArticleInline from "./OrderArticleInline";
 import OrderFooter from "./OrderFooter";
 import OrderHeader from "./OrderHeader";
 
@@ -9,13 +10,6 @@ const OrderCard: React.FC<Order> = (props) => {
   const articles = props.articles;
   const orderButtonRef = useRef<HTMLButtonElement>(null);
   const orderContentRef = useRef<HTMLElement>(null);
-
-  const total = () => {
-    return articles.reduce(
-      (prev: number, current: Article) => prev + current.price,
-      0
-    );
-  };
 
   const handleClick = () => {
     if (orderContentRef.current === null || orderButtonRef.current === null) {
@@ -39,10 +33,12 @@ const OrderCard: React.FC<Order> = (props) => {
         orderContentRef={orderContentRef}
       />
       <main ref={orderContentRef} className='order-main'>
-        {articles.map((article: Article, index: number) => {
-          return <ArticleInline key={index} article={article} index={index} />;
+        {articles.map((article: OrderArticle, index: number) => {
+          return (
+            <OrderArticleInline key={index} article={article} index={index} />
+          );
         })}
-        <OrderFooter total={total()} />
+        <OrderFooter total={props.totalPrice} />
       </main>
     </div>
   );

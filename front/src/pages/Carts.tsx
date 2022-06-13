@@ -18,6 +18,7 @@ import {
   CartModal,
   CartFooter,
 } from "../components";
+import OrderArticle from "../types/OrderArticle";
 
 export default function Carts() {
   const notify = () => toast.success("Payment done!");
@@ -49,7 +50,7 @@ export default function Carts() {
       setIsLoading(true);
       setTimeout(async () => {
         const articles = carts.map((cart: Cart) => {
-          return cart.article;
+          return new OrderArticle(cart.article, cart.quantity);
         });
 
         await createOrder(

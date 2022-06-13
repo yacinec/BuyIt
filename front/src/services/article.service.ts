@@ -1,19 +1,17 @@
 import { check_access_token } from "../middlewares";
 import { Tokens } from "../types";
 
-const API_URL = "http://localhost:1234/articles";
+const API_URL = `${process.env.REACT_APP_API_URL}/api/v1/articles`;
 
 export const getArticles = async (tokens: Tokens) => {
   const headers = await check_access_token(tokens);
-
-  return fetch(`${API_URL}/find-all`, {
+  const response = await fetch(`${API_URL}`, {
     method: "GET",
     headers,
-  })
-    .then((response) => {
-      return response.json();
-    })
-    .catch((err) => {
-      return err;
-    });
+  });
+  if (response.ok) {
+    return await response.json();
+  } else {
+    throw response.statusText;
+  }
 };

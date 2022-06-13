@@ -1,54 +1,54 @@
 import { Tokens, User } from "../types";
 
-const API_URL = "http://localhost:1234/auth";
-
+const API_URL = `${process.env.REACT_APP_API_URL}/auth`;
 export const auth_login = async (user: User) => {
-  return fetch(`${API_URL}/sign-in`, {
+  const response = await fetch(`${API_URL}/signin`, {
     method: "POST",
     headers: {
       "Content-type": "application/json",
       "Access-Control-Allow-Origin": "*",
     },
     body: JSON.stringify(user),
-  })
-    .then((response) => {
-      return response.json();
-    })
-    .catch((err) => {
-      return err;
-    });
+  });
+
+  if (response.ok) {
+    return await response.json();
+  } else {
+    throw response.statusText;
+  }
 };
 
 export const auth_register = async (user: User) => {
-  return fetch(`${API_URL}/sign-up`, {
+  console.log(API_URL);
+
+  const response = await fetch(`${API_URL}/signup`, {
     method: "POST",
     headers: {
       "Content-type": "application/json",
       "Access-Control-Allow-Origin": "*",
     },
     body: JSON.stringify(user),
-  })
-    .then((response) => {
-      return response.json();
-    })
-    .catch((err) => {
-      return err;
-    });
+  });
+  if (response.ok) {
+    return await response.json();
+  } else {
+    throw response.statusText;
+  }
 };
 
 export const auth_refresh = async (tokens: Tokens) => {
-  return fetch(`${API_URL}/refresh-token`, {
+  const response = await fetch(`${API_URL}/token`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${tokens.refreshToken}`,
       "Content-type": "application/json",
       "Access-Control-Allow-Origin": "*",
     },
-  })
-    .then((response) => {
-      return response.json();
-    })
-    .catch((err) => {
-      return err;
-    });
+  });
+
+  if (response.ok) {
+    return await response.json();
+  } else {
+    throw response.statusText;
+  }
 };

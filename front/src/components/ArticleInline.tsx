@@ -1,4 +1,5 @@
 import { Article } from "../types";
+import OrderArticle from "../types/OrderArticle";
 
 interface ArticleInlineProps {
   index: number;

@@ -412,6 +412,7 @@ a {
       color: $grey;
     }
   }
+  .article-inline-quantity,
   .single-article-price {
     font-weight: 600;
     margin-bottom: 30px;
@@ -506,6 +507,7 @@ a {
 
   .order-info p,
   .article-inline .article-inline-details p.article-inline-price,
+  .article-inline .article-inline-details p.article-inline-quantity,
   .orders .order .order-button {
     font-size: 0.8rem;
   }

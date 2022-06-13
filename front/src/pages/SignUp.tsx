@@ -24,14 +24,19 @@ export default function SignUp() {
   const handleClick = async (data: any) => {
     if (data.username && data.password) {
       const user = new User(data.username, data.password);
-      const result = await auth_register(user);
-      if (result.message) {
-        toast.error("Username and pasword do not match!");
-      }
-
-      if (result) {
+      try {
+        const result = await auth_register(user);
         toast.success("Your account has been created!");
+      } catch (err) {
+        toast.error("This account is already exists!");
       }
+      // if (result.message) {
+      //   toast.error("Username and pasword do not match!");
+      // }
+
+      // if (result) {
+      //   toast.success("Your account has been created!");
+      // }
     } else {
       toast.error("All fields need to be filled!");
     }
