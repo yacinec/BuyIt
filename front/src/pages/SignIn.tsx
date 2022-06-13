@@ -28,17 +28,25 @@ export default function SignIn() {
   const handleClick = async (data: SignInInputs) => {
     if (data.username && data.password) {
       const user = new User(data.username, data.password);
-      const result = await auth_login(user);
-      if (result.message) {
-        toast.error("Username and pasword do not match!");
-      }
 
-      dispatch(
-        login(
-          result.user._id,
-          new Tokens(result.accessToken, result.refreshToken, result.expiresIn)
-        )
-      );
+      try {
+        const result = await auth_login(user);
+        console.log(result);
+        dispatch(
+          login(
+            result._id,
+            new Tokens(
+              result.accessToken,
+              result.refreshToken,
+              result.expiresIn
+            )
+          )
+        );
+      } catch (error) {
+        if (error === "Not Found") {
+          toast.error("Username and pasword do not match!");
+        }
+      }
     } else {
       toast.error("All fields need to be filled!");
     }
@@ -64,14 +72,14 @@ export default function SignIn() {
             placeholder='Username'
             {...register("username", {
               required: true,
-              minLength: 4,
+              minLength: 1,
               maxLength: 20,
             })}
           />
           <input
             type='password'
             placeholder='Password'
-            {...register("password", { required: true, minLength: 4 })}
+            {...register("password", { required: true, minLength: 1 })}
           />
           <Button submit={true}>Login</Button>
         </form>

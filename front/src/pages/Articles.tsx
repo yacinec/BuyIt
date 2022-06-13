@@ -16,10 +16,14 @@ export default function Articles() {
   const dispatch = useDispatch();
 
   const fetchArticles = async () => {
-    const articles = await getArticles(
-      new Tokens(accessToken, refreshToken, expiresIn)
-    );
-    dispatch(get_all_articles(articles));
+    try {
+      const articles = await getArticles(
+        new Tokens(accessToken, refreshToken, expiresIn)
+      );
+      dispatch(get_all_articles(articles));
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   useEffect(() => {

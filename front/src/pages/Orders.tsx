@@ -22,11 +22,15 @@ export default function Orders() {
   );
 
   const fetchOrders = async () => {
-    const orders = await getOrders(
-      userId,
-      new Tokens(accessToken, refreshToken, expiresIn)
-    );
-    dispatch(get_all_orders(orders));
+    try {
+      const orders = await getOrders(
+        userId,
+        new Tokens(accessToken, refreshToken, expiresIn)
+      );
+      dispatch(get_all_orders(orders));
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   useEffect(() => {

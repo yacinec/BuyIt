@@ -1,21 +1,19 @@
 import { check_access_token } from "../middlewares";
 import { Order, Tokens } from "../types";
 
-const API_URL = "http://localhost:1234/orders";
-
+const API_URL = `${process.env.REACT_APP_API_URL}/api/v1`;
 export const getOrders = async (userId: string, tokens: Tokens) => {
   const headers = await check_access_token(tokens);
-  return fetch(`${API_URL}/find-all-user`, {
-    method: "POST",
+  const response = await fetch(`${API_URL}/users/${userId}/orders`, {
+    method: "GET",
     headers,
-    body: JSON.stringify({ _id: userId }),
-  })
-    .then((response) => {
-      return response.json();
-    })
-    .catch((err) => {
-      return err;
-    });
+    //body: JSON.stringify({ _id: userId }),
+  });
+  if (response.ok) {
+    return await response.json();
+  } else {
+    throw response.statusText;
+  }
 };
 
 export const createOrder = async (
@@ -24,13 +22,13 @@ export const createOrder = async (
   tokens: Tokens
 ) => {
   const headers = await check_access_token(tokens);
-  return fetch(`${API_URL}/create`, {
+  return fetch(`${API_URL}/users/${userId}/orders`, {
     method: "POST",
     headers,
     body: JSON.stringify({
       articles: newOrder.articles,
       address: newOrder.address,
-      userId,
+      //userId,
     }),
   })
     .then((response) => {
