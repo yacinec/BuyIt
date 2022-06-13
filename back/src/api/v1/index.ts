@@ -4,6 +4,9 @@ import {
   idMiddleware,
   articleAttExistMiddleware,
   orderAttExistMiddleware,
+  adminMiddleware,
+  userIdMiddleware,
+  userIdAdminMiddleware,
 } from "../../middlewares";
 import {
   ArticleController,
@@ -13,30 +16,71 @@ import {
 
 // User routes.
 const userRoutes = Router();
-userRoutes.get("/", UserController.findAll);
-userRoutes.get("/:id", idMiddleware, UserController.findOne);
-userRoutes.put("/:id", idMiddleware, UserController.update);
-userRoutes.delete("/:id", idMiddleware, UserController.remove);
-userRoutes.get("/:id/orders/", UserController.findAllOrders);
+userRoutes.get("/", adminMiddleware, UserController.findAll);
+userRoutes.get(
+  "/:id",
+  [idMiddleware, userIdMiddleware],
+  UserController.findOne
+);
+userRoutes.put(
+  "/:id",
+  [idMiddleware, userIdAdminMiddleware],
+  UserController.update
+);
+userRoutes.delete(
+  "/:id",
+  [idMiddleware, userIdAdminMiddleware],
+  UserController.remove
+);
 userRoutes.post(
   "/:id/orders/",
-  [idMiddleware, orderAttExistMiddleware],
+  [idMiddleware, userIdMiddleware, orderAttExistMiddleware],
   UserController.createOrder
+);
+userRoutes.get(
+  "/:id/orders/",
+  userIdAdminMiddleware,
+  UserController.findAllOrders
 );
 
 // Article routes.
 const articleRoutes = Router();
-articleRoutes.post("/", articleAttExistMiddleware, ArticleController.create);
+articleRoutes.post(
+  "/",
+  [adminMiddleware, articleAttExistMiddleware],
+  ArticleController.create
+);
 articleRoutes.get("/", ArticleController.findAll);
 articleRoutes.get("/:id", idMiddleware, ArticleController.findOne);
-articleRoutes.put("/:id", idMiddleware, ArticleController.update);
-articleRoutes.delete("/:id", idMiddleware, ArticleController.remove);
+articleRoutes.put(
+  "/:id",
+  [adminMiddleware, idMiddleware],
+  ArticleController.update
+);
+articleRoutes.delete(
+  "/:id",
+  [adminMiddleware, idMiddleware],
+  ArticleController.remove
+);
 
 // Order routes.
 const orderRoutes = Router();
-orderRoutes.get("/:id", idMiddleware, OrderController.findOne);
-orderRoutes.put("/:id", idMiddleware, OrderController.update);
-orderRoutes.delete("/:id", idMiddleware, OrderController.remove);
+orderRoutes.get("/", adminMiddleware, OrderController.findAll);
+orderRoutes.get(
+  "/:id",
+  [idMiddleware, userIdAdminMiddleware],
+  OrderController.findOne
+);
+orderRoutes.put(
+  "/:id",
+  [idMiddleware, userIdAdminMiddleware],
+  OrderController.update
+);
+orderRoutes.delete(
+  "/:id",
+  [idMiddleware, userIdAdminMiddleware],
+  OrderController.remove
+);
 
 // Api routes.
 const apiRoutes = Router();

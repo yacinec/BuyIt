@@ -83,10 +83,10 @@ const createOrder = async (req: Request, res: Response, next: NextFunction) => {
   const orderDto = toOrderDto(
     "",
     req.body.articles,
-    req.body.totalPrice,
-    req.body.createdAt,
-    req.body.modifiedAt,
-    req.body.progression,
+    -1,
+    new Date(0),
+    new Date(0),
+    "",
     req.body.address,
     { _id: req.params.id, username: "" }
   );
@@ -121,4 +121,11 @@ const findAllOrders = async (
   res.json(data);
 };
 
-export default { findAll, findOne, update, remove, createOrder, findAllOrders };
+export default {
+  findAll,
+  findOne,
+  update,
+  remove,
+  createOrder,
+  findAllOrders,
+};

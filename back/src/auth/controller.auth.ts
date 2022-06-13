@@ -2,6 +2,7 @@ import { NextFunction, Response, Request } from "express";
 
 import { AuthUserDto } from "../dtos";
 import { ApiError } from "../errors";
+import { retrieveRequestToken } from "../utils";
 import AuthService from "./service.auth";
 
 /**
@@ -53,7 +54,8 @@ const signIn = async (req: Request, res: Response, next: NextFunction) => {
  * @param next {NextFunction}
  */
 const refreshToken = (req: Request, res: Response, next: NextFunction) => {
-  const data = AuthService.refreshToken(req.body.refreshToken);
+  const refreshToken = retrieveRequestToken(req);
+  const data = AuthService.refreshToken(refreshToken);
 
   if (data instanceof ApiError) {
     next(data);

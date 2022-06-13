@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 
 import { ApiError } from "../errors";
+import { retrieveRequestToken } from "../utils";
 
 /**
  * Checks the username and password existence in the request.
@@ -36,20 +37,10 @@ export const refreshTokenMiddleware = (
   res: Response,
   next: NextFunction
 ): void => {
-  const authHeader = req.headers["authorization"];
-
-  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+  if (!retrieveRequestToken(req)) {
     next(ApiError.badRequest("Bad request."));
     return;
   }
 
-  const refreshToken = authHeader.split(" ")[1];
-
-  if (!refreshToken) {
-    next(ApiError.badRequest("Bad request."));
-    return;
-  }
-
-  req.body.refreshToken = refreshToken;
   next();
 };

@@ -33,6 +33,11 @@ const REFRESH_TOKEN_PUBLIC_KEY: Secret | undefined =
 const REFRESH_TOKEN_EXPIRES_IN: Secret | undefined =
   process.env.REFRESH_TOKEN_EXPIRES_IN;
 
+const ROLES = {
+  ADMIN: "ADMIN",
+  MEMBER: "MEMBER",
+};
+
 export {
   PORT,
   DATABASE_URL,
@@ -45,4 +50,5 @@ export {
   REFRESH_TOKEN_PRIVATE_KEY,
   REFRESH_TOKEN_PUBLIC_KEY,
   REFRESH_TOKEN_EXPIRES_IN,
+  ROLES,
 };

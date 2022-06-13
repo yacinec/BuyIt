@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 
 import { ACCESS_TOKEN_PRIVATE_KEY } from "../config";
 import { ApiError } from "../errors";
-import { verifyToken } from "../utils";
+import { retrieveRequestToken, verifyToken } from "../utils";
 
 /**
  * Checks the user authentication with a given token.
@@ -16,14 +16,7 @@ export const apiMiddleware = (
   res: Response,
   next: NextFunction
 ): void => {
-  const authHeader = req.headers["authorization"];
-
-  if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    next(ApiError.unauthorized("Token is expired."));
-    return;
-  }
-
-  const accessToken = authHeader.split(" ")[1];
+  const accessToken = retrieveRequestToken(req);
 
   if (!accessToken) {
     next(ApiError.unauthorized("Token is expired."));

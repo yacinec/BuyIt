@@ -5,6 +5,23 @@ import { OrderService } from "../services";
 import { toOrderDto } from "../../../mappers";
 
 /**
+ * Retrieves all existing orders.
+ * @param req {Request}
+ * @param res {Response}
+ * @param next {NextFunction}
+ */
+const findAll = async (req: Request, res: Response, next: NextFunction) => {
+  const data = await OrderService.findAll();
+
+  if (data instanceof ApiError) {
+    next(data);
+    return;
+  }
+
+  res.json(data);
+};
+
+/**
  * Retrieves the order corresponding to the specified id.
  * @param req {Request}
  * @param res {Response}
@@ -65,4 +82,4 @@ const remove = async (req: Request, res: Response, next: NextFunction) => {
   res.json(data);
 };
 
-export default { findOne, update, remove };
+export default { findAll, findOne, update, remove };

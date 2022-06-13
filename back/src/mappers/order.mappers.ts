@@ -17,7 +17,7 @@ import { toArticleDto, toUserDto } from "../mappers";
 export const toOrderDto = (
   _id = "",
   articles: OrderArticleEntity[] = [],
-  totalPrice = 0,
+  totalPrice = -1,
   createdAt = new Date(0),
   modifiedAt = new Date(0),
   progression = "",

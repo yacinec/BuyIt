@@ -4,6 +4,31 @@ import { toOrderDto } from "../../../mappers";
 import { OrderModel } from "../../../models";
 
 /**
+ * Returns all the existing orders in the database.
+ * @returns {Promise<ApiError | OrderDto[]>}
+ */
+const findAll = async (): Promise<ApiError | OrderDto[]> => {
+  try {
+    const orders = await OrderModel.find();
+
+    return orders.map((order) =>
+      toOrderDto(
+        order._id,
+        order.articles,
+        order.totalPrice,
+        order.createdAt,
+        order.modifiedAt,
+        order.progression,
+        order.address,
+        order.userRef
+      )
+    );
+  } catch (err) {
+    return ApiError.internal("Internal Server error.");
+  }
+};
+
+/**
  * Returns the article with the given id.
  * @param id {string}
  * @returns {Promise<ApiError | OrderDto>}
@@ -98,4 +123,4 @@ const remove = async (id: string): Promise<ApiError | OrderDto> => {
   }
 };
 
-export default { findOne, update, remove };
+export default { findAll, findOne, update, remove };
