@@ -10,9 +10,11 @@ const DATABASE_URL = process.env.DATABASE_URI;
 // Hashing Data.
 const BCRYPT_SALT = process.env.BCRYPT_SALT;
 
-// Password requirements Data.
+// Authentification Data Requirements .
 const PWD_PATTERN =
   /(?=.{12,}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])((?=.\W)|(?=.*_)|(?=.*\*))^[^ ]+$/;
+const USERNAME_PATTERN =
+  /^(?=.{8,16}$)(?![_])(?!.*[_]{2})[a-zA-Z0-9_]+(?<![_])$/;
 
 // JWT Data.
 const JWT_ALGO: Algorithm | undefined = process.env.JWT_ALGO as Algorithm;
@@ -43,6 +45,7 @@ export {
   DATABASE_URL,
   BCRYPT_SALT,
   PWD_PATTERN,
+  USERNAME_PATTERN,
   JWT_ALGO,
   ACCESS_TOKEN_PRIVATE_KEY,
   ACCESS_TOKEN_PUBLIC_KEY,

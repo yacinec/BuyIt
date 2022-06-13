@@ -13,6 +13,5 @@ export const connectDB = async (): Promise<void> => {
     })
     .catch((err) => {
       console.log(err.message);
-      setTimeout(connectDB, 5000);
     });
 };

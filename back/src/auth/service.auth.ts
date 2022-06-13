@@ -13,6 +13,7 @@ import {
   generateToken,
   verifyToken,
   passwordIsCorrect,
+  usernameIsCorrect,
 } from "../utils";
 import { AuthUserEntity, UserEntity } from "../entities";
 import { toUserDto } from "../mappers";
@@ -34,6 +35,12 @@ const signUp = async (
 
     if (userExists) {
       return ApiError.conflict("Username is already used.");
+    }
+
+    if (!usernameIsCorrect(username)) {
+      return ApiError.unauthorized(
+        "Username does not follow the pattern requirements."
+      );
     }
 
     if (!passwordIsCorrect(authUserDto.get_password())) {
