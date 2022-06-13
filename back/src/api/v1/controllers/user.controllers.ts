@@ -74,6 +74,33 @@ const remove = async (req: Request, res: Response, next: NextFunction) => {
 };
 
 /**
+ * Appends a new order with request data.
+ * @param req {Request}
+ * @param res {Response}
+ * @param next {NextFunction}
+ */
+const createOrder = async (req: Request, res: Response, next: NextFunction) => {
+  const orderDto = toOrderDto(
+    "",
+    req.body.articles,
+    req.body.totalPrice,
+    req.body.createdAt,
+    req.body.modifiedAt,
+    req.body.progression,
+    req.body.address,
+    { _id: req.params.id, username: "" }
+  );
+  const data = await UserService.createOrder(orderDto);
+
+  if (data instanceof ApiError) {
+    next(data);
+    return;
+  }
+
+  res.json(data);
+};
+
+/**
  * Retrieves all existing orders corresponding to the specified user id.
  * @param req {Request}
  * @param res {Response}
@@ -94,30 +121,4 @@ const findAllOrders = async (
   res.json(data);
 };
 
-/**
- * Appends a new order with request data.
- * @param req {Request}
- * @param res {Response}
- * @param next {NextFunction}
- */
-const createOrder = async (req: Request, res: Response, next: NextFunction) => {
-  const orderDto = toOrderDto(
-    "",
-    req.body.articlesRef,
-    req.body.createdAt,
-    req.body.modifiedAt,
-    req.body.progression,
-    req.body.address,
-    req.params.id
-  );
-  const data = await UserService.createOrder(orderDto);
-
-  if (data instanceof ApiError) {
-    next(data);
-    return;
-  }
-
-  res.json(data);
-};
-
-export default { findAll, findOne, findAllOrders, update, remove, createOrder };
+export default { findAll, findOne, update, remove, createOrder, findAllOrders };

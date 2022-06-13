@@ -1,10 +1,16 @@
 import { ArticleDto } from ".";
 import { UserDto } from ".";
 
+export interface ArticleOrderDto {
+  articleRef: ArticleDto;
+  amount: number;
+}
+
 export class OrderDto {
   constructor(
     private _id: string,
-    private articlesRef: ArticleDto[],
+    private articles: ArticleOrderDto[],
+    private totalPrice: number,
     private createdAt: Date,
     private modifiedAt: Date,
     private progression: string,
@@ -16,8 +22,12 @@ export class OrderDto {
     return this._id;
   }
 
-  public get_articlesRef() {
-    return this.articlesRef;
+  public get_articles() {
+    return this.articles;
+  }
+
+  public get_totalPrice() {
+    return this.totalPrice;
   }
 
   public get_createdAt() {

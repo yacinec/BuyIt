@@ -1,11 +1,12 @@
 import { OrderDto } from "../dtos";
-import { ArticleEntity, UserEntity } from "../entities";
+import { ArticleOrderEntity, UserEntity } from "../entities";
 import { toArticleDto, toUserDto } from "../mappers";
 
 /**
  * Builds 'OrderDto' object.
  * @param _id {string}
- * @param articlesRef {ArticleEntity[]}
+ * @param articles {ArticleOrderEntity[]}
+ * @param totalPrice {number}
  * @param createdAt {Date}
  * @param modifiedAt {Date}
  * @param progression {string}
@@ -15,7 +16,8 @@ import { toArticleDto, toUserDto } from "../mappers";
  */
 export const toOrderDto = (
   _id = "",
-  articlesRef: ArticleEntity[] = [],
+  articles: ArticleOrderEntity[] = [],
+  totalPrice = 0,
   createdAt = new Date(0),
   modifiedAt = new Date(0),
   progression = "",
@@ -24,16 +26,20 @@ export const toOrderDto = (
 ): OrderDto => {
   return new OrderDto(
     _id,
-    articlesRef.map((article: ArticleEntity) =>
-      toArticleDto(
-        article._id,
-        article.name,
-        article.price,
-        article.img,
-        article.description,
-        article.brand
-      )
-    ),
+    articles.map((article: ArticleOrderEntity) => {
+      return {
+        articleRef: toArticleDto(
+          article.articleRef._id,
+          article.articleRef.name,
+          article.articleRef.price,
+          article.articleRef.img,
+          article.articleRef.description,
+          article.articleRef.brand
+        ),
+        amount: article.amount,
+      };
+    }),
+    totalPrice,
     createdAt,
     modifiedAt,
     progression,

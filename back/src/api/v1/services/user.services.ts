@@ -1,4 +1,4 @@
-import { OrderDto, UserDto } from "../../../dtos";
+import { ArticleOrderDto, OrderDto, UserDto } from "../../../dtos";
 import { ApiError } from "../../../errors";
 import { toOrderDto, toUserDto } from "../../../mappers";
 import { OrderModel, UserModel } from "../../../models";
@@ -95,17 +95,25 @@ const createOrder = async (
   orderDto: OrderDto
 ): Promise<ApiError | OrderDto> => {
   try {
+    const totalPrice = orderDto
+      .get_articles()
+      .map(
+        (article: ArticleOrderDto) =>
+          article.articleRef.get_price() * article.amount
+      )
+      .reduce((prev: number, curr: number) => prev + curr);
+
     const newOrder = await OrderModel.create({
-      articlesRef: orderDto
-        .get_articlesRef()
-        .map((article) => article.get__id()),
+      articles: orderDto.get_articles(),
+      totalPrice: totalPrice,
       address: orderDto.get_address(),
       userRef: orderDto.get_userRef().get__id(),
     });
 
     return toOrderDto(
       newOrder._id,
-      newOrder.articlesRef,
+      newOrder.articles,
+      newOrder.totalPrice,
       newOrder.createdAt,
       newOrder.modifiedAt,
       newOrder.progression,
@@ -126,12 +134,13 @@ const findAllOrders = async (id: string): Promise<ApiError | OrderDto[]> => {
   try {
     const orders = await OrderModel.find({
       userRef: id,
-    }).populate("articlesRef");
+    }).populate("articles.articleRef");
 
     return orders.map((order) =>
       toOrderDto(
         order._id,
-        order.articlesRef,
+        order.articles,
+        order.totalPrice,
         order.createdAt,
         order.modifiedAt,
         order.progression,

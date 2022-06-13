@@ -14,9 +14,9 @@ export const orderAttExistMiddleware = (
   res: Response,
   next: NextFunction
 ): void => {
-  const { articlesRef, address } = req.body;
+  const { articles, address } = req.body;
 
-  if (!articlesRef || !address) {
+  if (!articles || !address) {
     next(ApiError.badRequest("Wrong parameters."));
     return;
   }

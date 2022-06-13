@@ -10,7 +10,7 @@ import { OrderModel } from "../../../models";
  */
 const findOne = async (id: string): Promise<ApiError | OrderDto> => {
   try {
-    const order = await OrderModel.findById(id).populate("articlesRef");
+    const order = await OrderModel.findById(id).populate("articles.articleRef");
 
     if (!order) {
       return ApiError.notFound("Order does not exist.");
@@ -18,7 +18,8 @@ const findOne = async (id: string): Promise<ApiError | OrderDto> => {
 
     return toOrderDto(
       order._id,
-      order.articlesRef,
+      order.articles,
+      order.totalPrice,
       order.createdAt,
       order.modifiedAt,
       order.progression,
@@ -54,7 +55,8 @@ const update = async (orderDto: OrderDto): Promise<ApiError | OrderDto> => {
 
     return toOrderDto(
       newOrder._id,
-      newOrder.articlesRef,
+      newOrder.articles,
+      newOrder.totalPrice,
       newOrder.createdAt,
       newOrder.modifiedAt,
       newOrder.progression,
@@ -83,7 +85,8 @@ const remove = async (id: string): Promise<ApiError | OrderDto> => {
 
     return toOrderDto(
       order._id,
-      order.articlesRef,
+      order.articles,
+      order.totalPrice,
       order.createdAt,
       order.modifiedAt,
       order.progression,

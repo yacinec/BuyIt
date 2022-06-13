@@ -30,7 +30,8 @@ const findOne = async (req: Request, res: Response, next: NextFunction) => {
 const update = async (req: Request, res: Response, next: NextFunction) => {
   const orderDto = toOrderDto(
     req.params.id,
-    req.body.articlesRef,
+    req.body.articles,
+    req.body.totalPrice,
     req.body.createdAt,
     req.body.modifiedAt,
     req.body.progression,
