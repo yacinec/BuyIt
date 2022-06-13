@@ -1,6 +1,6 @@
 import { UserEntity } from "./UserEntity";
 import { ArticleEntity } from "./ArticleEntity";
-import { ArticleOrderEntity, OrderEntity } from "./OrderEntity";
+import { OrderArticleEntity, OrderEntity } from "./OrderEntity";
 import { AuthUserEntity } from "./AuthUserEntity";
 
 export {
@@ -8,5 +8,5 @@ export {
   AuthUserEntity,
   ArticleEntity,
   OrderEntity,
-  ArticleOrderEntity,
+  OrderArticleEntity,
 };

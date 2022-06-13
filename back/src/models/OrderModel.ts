@@ -9,7 +9,7 @@ const orderSchema = new mongoose.Schema(
           ref: "Article",
           required: true,
         },
-        amount: {
+        quantity: {
           type: Number,
           required: true,
         },

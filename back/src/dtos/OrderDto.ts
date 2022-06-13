@@ -1,15 +1,15 @@
 import { ArticleDto } from ".";
 import { UserDto } from ".";
 
-export interface ArticleOrderDto {
+export interface OrderArticleDto {
   articleRef: ArticleDto;
-  amount: number;
+  quantity: number;
 }
 
 export class OrderDto {
   constructor(
     private _id: string,
-    private articles: ArticleOrderDto[],
+    private articles: OrderArticleDto[],
     private totalPrice: number,
     private createdAt: Date,
     private modifiedAt: Date,

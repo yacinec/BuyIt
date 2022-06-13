@@ -1,9 +1,9 @@
 import { ArticleEntity } from ".";
 import { UserEntity } from ".";
 
-export type ArticleOrderEntity = {
+export type OrderArticleEntity = {
   articleRef: ArticleEntity;
-  amount: number;
+  quantity: number;
 };
 
 /**
@@ -11,7 +11,7 @@ export type ArticleOrderEntity = {
  */
 export type OrderEntity = {
   _id: string;
-  articles: ArticleOrderEntity;
+  articles: OrderArticleEntity[];
   totalPrice: number;
   createdAt: Date;
   modifiedAt: Date;
