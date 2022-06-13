@@ -12,7 +12,7 @@ const BCRYPT_SALT = process.env.BCRYPT_SALT;
 
 // Password requirements Data.
 const PWD_PATTERN =
-  /(?=.{12,}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])((?=.\W)|(?=.*_))^[^ ]+$/;
+  /(?=.{12,}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])((?=.\W)|(?=.*_)|(?=.*\*))^[^ ]+$/;
 
 // JWT Data.
 const JWT_ALGO: Algorithm | undefined = process.env.JWT_ALGO as Algorithm;
